@@ -1,0 +1,38 @@
+<%= form_with(model: course, local: true) do |form| %>
+  <% if course.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h5 class="alert-heading"><%= I18n.t("errors.messages.not_saved",
+                                           count: course.errors.count,
+                                           resource: course.class.model_name.human.downcase)
+      %></h5>
+      <hr>
+      <% course.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :code %>
+    <%= form.text_field :code, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :semester %>
+    <%= form.text_field :semester, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :catalog_data %>
+    <%= form.text_area :catalog_data, class: "form-control", rows: 5 %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit  class: "btn btn-primary" %>
+  </div>
+<% end %>

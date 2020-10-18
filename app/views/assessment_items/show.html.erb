@@ -1,0 +1,18 @@
+<%= render_flash %>
+<p class="mt-3">
+  <strong>Name:</strong>
+  <%= @assessment_item.name %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @assessment_item.weight %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @assessment_item.course_id %>
+</p>
+
+<%= link_to 'Edit', edit_assessment_item_path(@assessment_item), class: "btn btn-outline-primary" %>
+<%= link_to 'Back', assessment_items_path, class: "btn btn-outline-primary" %>

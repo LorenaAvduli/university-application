@@ -1,0 +1,29 @@
+<%= render_flash %>
+
+<h1>Courses</h1>
+
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Code</th>
+    <th scope="col">Name</th>
+    <th scope="col">Semester</th>
+    <th scope="col" width="40%">Catalog Data</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @courses.each do |course| %>
+    <tr>
+      <td><%= course.code %></td>
+      <td><%= course.name %></td>
+      <td><%= course.semester %></td>
+      <td><%= truncate(course.catalog_data, length: 100) %></td>
+      <td>
+        <%= link_to 'Assessment Items', course_assessment_items_path(course), class: "btn btn-outline-primary btn-sm" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

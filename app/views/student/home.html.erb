@@ -1,0 +1,33 @@
+<%= render_flash %>
+
+<h1>Student Home Page</h1>
+<h1>Courses</h1>
+
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Code</th>
+    <th scope="col">Semester</th>
+    <th scope="col" width="40%">Catalog Data</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @courses.each do |course| %>
+    <tr>
+      <td><%= link_to course.name, student_grades_path(course: course.id) %></td>
+      <td><%= course.code %></td>
+      <td><%= course.semester %></td>
+      <td><%= truncate(course.catalog_data, length: 100) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<div>
+  <h4>Statistics (Overall Grade): </h4>
+  <%= compute_overall_grade %>
+</div>
+
+
+

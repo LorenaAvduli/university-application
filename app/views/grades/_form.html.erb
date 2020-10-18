@@ -1,0 +1,81 @@
+<%= form_with(model: grade, local: true) do |form| %>
+  <% if grade.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h5 class="alert-heading"><%= I18n.t("errors.messages.not_saved",
+                                           count: grade.errors.count,
+                                           resource: grade.class.model_name.human.downcase)
+      %></h5>
+      <hr>
+      <% grade.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :user_id %>
+    <%= form.select :user_id, @students, {include_blank: true}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :course_id %>
+    <%= form.select :course_id, display_courses(form.object.user), {include_blank: true}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :assessment_item_id %>
+    <%= form.select :assessment_item_id, display_assessment_items(form.object.course), {include_blank: true}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :exam %>
+    <%= form.text_field :exam, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :score %>
+    <%= form.number_field :score, class: "form-control", min: 0 %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+    $("#grade_course_id").on('change', function () {
+        let course_id = $(this).find('option:selected').val();
+        let assessment_items = $(this).closest('div').next('div').find("select#grade_assessment_item_id")
+        assessment_items.find('option').remove();
+
+        $.ajax({
+            url: "<%= assessment_items_grades_path %>",
+            type: "get",
+            data: {course_id: course_id},
+            success: function (data) {
+                assessment_items.append(new Option("Select Assessment Item",""))
+                data.forEach(function (element) {
+                    assessment_items.append(new Option(element.name, element.id));
+                });
+            }
+        });
+    });
+
+    $("#grade_user_id").on('change', function () {
+        let user_id = $(this).find('option:selected').val();
+        let courses = $(this).closest('div').next('div').find("select#grade_course_id")
+        courses.find('option').remove();
+
+        $.ajax({
+            url: "<%= courses_grades_path %>",
+            type: "get",
+            data: {user_id: user_id},
+            success: function (data) {
+                courses.append(new Option("Select Assessment Item",""))
+                data.forEach(function (element) {
+                    courses.append(new Option(element.name, element.id));
+                });
+            }
+        });
+    });
+</script>

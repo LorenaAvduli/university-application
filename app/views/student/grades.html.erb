@@ -1,0 +1,32 @@
+<%= render_flash %>
+
+<h1>Grades</h1>
+
+<table  class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Student</th>
+    <th scope="col">Course</th>
+    <th scope="col">Assessment Item</th>
+    <th scope="col">Exam</th>
+    <th scope="col">Score</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @grades.each do |grade| %>
+    <tr>
+      <td><%= grade.user.full_name %></td>
+      <td><%= grade.course.name %></td>
+      <td><%= grade.assessment_item.name %></td>
+      <td><%= grade.exam %></td>
+      <td><%= grade.score %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div>
+  <h4>Statistics (Overall Grade): </h4>
+  <%= compute_overall_grade %>
+</div>

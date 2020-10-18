@@ -1,0 +1,47 @@
+<%= form_with(model: user, local: true, url: params[:action] == "edit" ? student_path(user) : students_path) do |f| %>
+  <% if user.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h5 class="alert-heading"><%= I18n.t("errors.messages.not_saved",
+                                           count: user.errors.count,
+                                           resource: user.class.model_name.human.downcase)
+      %></h5>
+      <hr>
+      <% user.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :surname %><br />
+    <%= f.text_field :surname, autocomplete: "surname", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+  </div>
+  <% unless params[:action] == "edit" %>
+    <div class="form-group">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

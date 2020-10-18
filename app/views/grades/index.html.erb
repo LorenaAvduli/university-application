@@ -1,0 +1,35 @@
+<%= render_flash %>
+
+<h1>Grades</h1>
+
+<%= link_to 'New Grade', new_grade_path, class: "btn btn-outline-primary float-right mb-3"  %>
+
+<table  class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Student</th>
+      <th scope="col">Course</th>
+      <th scope="col">Assessment Item</th>
+      <th scope="col">Exam</th>
+      <th scope="col">Score</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @grades.each do |grade| %>
+      <tr>
+        <td><%= grade.user.full_name %></td>
+        <td><%= grade.course.name %></td>
+        <td><%= grade.assessment_item.name %></td>
+        <td><%= grade.exam %></td>
+        <td><%= grade.score %></td>
+        <td>
+          <%= link_to 'Show', grade, class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to 'Edit', edit_grade_path(grade), class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to 'Destroy', grade, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

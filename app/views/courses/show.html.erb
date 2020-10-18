@@ -1,0 +1,23 @@
+<%= render_flash %>
+<p class="mt-3">
+  <strong>Code:</strong>
+  <%= @course.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Semester:</strong>
+  <%= @course.semester %>
+</p>
+
+<p>
+  <strong>Catalog data:</strong>
+  <%= @course.catalog_data %>
+</p>
+
+<%= link_to 'Edit', edit_course_path(@course), class: "btn btn-outline-primary" %>
+<%= link_to 'Back', courses_path, class: "btn btn-outline-primary" %>

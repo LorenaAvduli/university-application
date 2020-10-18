@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-6">
+
+    <h1>Register Student</h1>
+
+    <%= form_for(:user_course, url: register_course_path(@course), :method => :post) do |form| %>
+      <% if @user_course.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+          <h5 class="alert-heading"><%= I18n.t("errors.messages.not_saved",
+                                               count: @user_course.errors.count,
+                                               resource: @user_course.class.model_name.human.downcase)
+          %></h5>
+          <hr>
+          <% @user_course.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :user_id %>
+        <%= form.select :user_id, @students,{include_blank: true}, { class: "form-control" } %>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit "Register user", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <%= link_to 'Back', courses_path, class: "btn btn-outline-primary" %>
+  </div>
+</div>

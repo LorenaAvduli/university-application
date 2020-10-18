@@ -1,0 +1,31 @@
+<%= render_flash %>
+
+<h1>Assessment Items</h1>
+<%= link_to 'Courses', root_path, class: "btn btn-outline-primary mb-3" %>
+
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Weight (%)</th>
+    <th scope="col">Course</th>
+    <th scope="col">Statistics</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @assessment_items.each do |assessment_item| %>
+    <tr>
+      <td><%= assessment_item.name %></td>
+      <td><%= assessment_item.weight %></td>
+      <td><%= assessment_item.course.name %></td>
+      <td>
+        <div>Maximum: <%= assessment_item.grades.maximum(:score) || 0 %></div>
+        <div>Minimum: <%= assessment_item.grades.minimum(:score) || 0 %></div>
+        <div>Average: <%= assessment_item.grades.average(:score) || 0 %></div>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

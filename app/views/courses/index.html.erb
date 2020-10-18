@@ -1,0 +1,35 @@
+<%= render_flash %>
+
+<h1>Courses</h1>
+
+<%= link_to 'New Course', new_course_path, class: "btn btn-outline-primary float-right mb-3" %>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Code</th>
+      <th scope="col">Name</th>
+      <th scope="col">Semester</th>
+      <th scope="col" width="30%">Catalog Data</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.code %></td>
+        <td><%= course.name %></td>
+        <td><%= course.semester %></td>
+        <td><%= truncate(course.catalog_data, length: 100) %></td>
+        <td>
+          <%= link_to 'Register Student', register_student_course_path(course), class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to 'Students', students_path(course: course.id), class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to 'Show', course, class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to 'Edit', edit_course_path(course), class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

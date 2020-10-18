@@ -1,0 +1,31 @@
+<%= render_flash %>
+
+<h1>Assessment Items</h1>
+
+<%= link_to 'New Assessment Item', new_assessment_item_path, class: "btn btn-outline-primary float-right mb-3" %>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Weight (%)</th>
+      <th scope="col">Course</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assessment_items.each do |assessment_item| %>
+      <tr>
+        <td><%= assessment_item.name %></td>
+        <td><%= assessment_item.weight %></td>
+        <td><%= assessment_item.course.name %></td>
+        <td>
+          <%= link_to 'Show', assessment_item, class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to 'Edit', edit_assessment_item_path(assessment_item), class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to 'Destroy', assessment_item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

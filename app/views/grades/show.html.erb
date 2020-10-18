@@ -1,0 +1,29 @@
+<%= render_flash %>
+
+<p class="pt-3">
+  <strong>Student:</strong>
+  <%= @grade.user.full_name %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @grade.course.name %>
+</p>
+
+<p>
+  <strong>Assessment Item:</strong>
+  <%= @grade.assessment_item.name %>
+</p>
+
+<p>
+  <strong>Exam:</strong>
+  <%= @grade.exam %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @grade.score %>
+</p>
+
+<%= link_to 'Edit', edit_grade_path(@grade), class: "btn btn-outline-primary" %>
+<%= link_to 'Back', grades_path, class: "btn btn-outline-primary" %>
